@@ -1,0 +1,23 @@
+.ulbiankuang{
+	border-bottom:1px solid #000;
+	border-style:solid;
+	display: block;
+	text-align:center;
+	line-height: 30px;
+	cursor: pointer;
+	border-radius: 5px;
+}
+.spanfun {
+/* 	height: 30px; */
+	line-height: 30px;
+	cursor: pointer;
+	color: #3270BD;
+/* 	font-size: 14px; */
+	font-family: 'Î¢ÈíÑÅºÚ';
+/* 	padding-left: 28px; */
+	display: block;
+	background: #F9F9F9;
+	border-radius: 5px;
+	border: 1px solid #928F8A;
+	text-align:center;
+}

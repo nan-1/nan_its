@@ -1,0 +1,77 @@
+@CHARSET "UTF-8";
+border:1px solid #ffcc00;background:#fffff7
+button {
+
+padding: .3em .99em;
+
+border: 1px solid rgba(0,0,0,.1);
+
+background: #58a linear-gradient(hsla(0,0%,100%,.2),transparent);
+
+border-radius: .2em;
+
+box-shadow: 0 .05em .25em rgba(0,0,0,.5);
+
+color: #00ff00;
+
+text-shadow: 0 -.05em .05em rgba(0,0,0,.5);
+
+font-size: 125%;
+
+line-height: 1.5;
+
+}
+
+button.ok {
+
+background-color: #6b0;
+
+}
+
+button.cancel {
+
+background-color: #c00;
+
+}
+
+
+.xinfeng {
+	width: 10em;
+	height: 8em;
+	float: left;
+	padding: 1em;
+	border: 1em solid transparent;
+	background: linear-gradient(white, white) padding-box,
+	repeating-linear-gradient(-45deg,
+	red 0, red 12.5%,
+	transparent 0, transparent 25%,
+	#58a 0, #58a 37.5%,
+	transparent 0, transparent 50%)
+	0 / 5em 5em;
+}
+
+
+
+
+
+.text{
+    width: 300px;
+    height: 200px;
+    position: absolute;
+    left: 50%;
+    margin-left: -150px;
+    background-image: -webkit-linear-gradient(left,blue,#66ffff 10%,#cc00ff 20%,#CC00CC 30%, #CCCCFF 40%, #00FFFF 50%,#CCCCFF 60%,#CC00CC 70%,#CC00FF 80%,#66FFFF 90%,blue 100%);
+    -webkit-text-fill-color: transparent;/* 将字体设置成透明色 */
+    -webkit-background-clip: text;/* 裁剪背景图，使文字作为裁剪区域向外裁剪 */
+    -webkit-background-size: 200% 100%; 
+    -webkit-animation: masked-animation 4s linear infinite;
+    font-size: 35px;
+}
+@keyframes masked-animation {
+    0% {
+        background-position: 0  0;
+    }
+    100% {
+        background-position: -100%  0;
+    }
+}

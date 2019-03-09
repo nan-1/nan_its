@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- namespace:命名空间，作用就是对sql进行分类化管理，sql隔离 注意：在使用mapper的代理方法开发时，有重要作用 ;namespace命名必须与Mapper接口的路径相同 -->
+<mapper namespace="dao.YhDao">
+	<!-- 按照id查询 -->
+	<!-- 将sql语句封装到MapperStatement中，所以也将id 成为statement的Id -->
+	<!-- paramerType：指定输入参数的类型。 #{ } ：代表占位符。 #{id }：表示接受输入参数id的值，如果输入参数是简单类型，#{ 
+		}中的参数名可以任意 ，可以是value或是其他值 resultType：表示sql输出结果的所映射的Javabean的对象类型，resultType指定将单条记录映射成Java对像 -->
+	<!-- parameterType可选项：参数类型，resulttype：返回值类型 -->
+
+	<select id="getYhall" parameterType="Yh" resultType="Yh">
+<!-- 	<bind name="name" value="'%' + name + '%'" />居然会报错 -->
+		SELECT * FROM yh where 1=1
+		<if test="name!= null and name!=''">
+		and name like '%'||#{name}||'%'
+		</if>
+	</select>
+	<!-- 查询当月记录 -->
+	<!-- select * from yh where to_char(sysdate,'yyyy-mm')=to_char(zhucedate,'yyyy-mm'); -->
+	<select id="getYhbyname" parameterType="String" resultType="Yh">
+		SELECT * FROM yh where name=#{name}
+	</select>
+	<select id="getYhbyid" parameterType="String" resultType="Yh">
+		SELECT * FROM yh where id=#{id}
+	</select>
+
+	<insert id="zhuce">
+		INSERT INTO yh(id,name,pwd
+		<if test="zjhm != null and zjhm !=''">
+			,zjhm
+		</if>
+		,zhucedate) values(sys_guid(),#{name},#{pwd}
+		<if test="zjhm != null and zjhm !=''">
+			,#{zjhm}
+		</if>
+		,(sysdate))
+	</insert>
+	<delete id="shanchuByname">
+		delete from yh where name =#{name}
+	</delete>
+	<update id="updateYh">
+		update yh set name =#{name},pwd =#{pwd}
+		<if test="zjhm!=null and zjhm!='' ">
+			,zjhm =#{zjhm}
+		</if>
+		where id=#{id}
+	</update>
+</mapper>

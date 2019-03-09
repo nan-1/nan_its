@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="dao.TongjiDao">
+<select id="zhucetongji"  resultType="shitilei.TongjiVo">
+select to_char(zhucedate,'yyyy-mm') zhucedate ,count(name) nums from yh group by to_char(zhucedate,'yyyy-mm') order by zhucedate
+</select>
+
+</mapper>

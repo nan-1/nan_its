@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD SQL Map Config 3.0//EN"
+                "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+<!-- 配置typeAlias，将实体类匹配成XXXMapper.xml中可以直接使用的类型，相当于一个别名，在XXXMapper.xml中type就无需再写完整的实体类全路径，直接用alias的值来代替 -->
+    <typeAliases>
+        <typeAlias type="shitilei.Yh" alias="Yh" />
+        <typeAlias type="shitilei.YhVo" alias="YhVo" />
+    </typeAliases>
+    <!-- mappers 告诉了Mybatis去哪里找持久化类的映射文件 -->
+		<!-- 要使延迟加载生效必须配置下面两个属性 -->
+	<!-- <settings>
+		<setting name="lazyLoadingEnabled" value="true"/>
+		<setting name="aggressiveLazyLoading" value="false"/>
+	</settings>
+	<mappers>
+		<mapper resource="org/fkit/mapper/UserMapper.xml"/>
+		<mapper resource="org/fkit/mapper/StudentMapper.xml"/>
+		<mapper resource="org/fkit/mapper/ClazzMapper.xml"/>
+		<mapper resource="org/fkit/mapper/CardMapper.xml"/>
+		<mapper resource="org/fkit/mapper/PersonMapper.xml"/>
+	</mappers> -->
+</configuration>

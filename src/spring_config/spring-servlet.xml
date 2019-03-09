@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:p="http://www.springframework.org/schema/p"   
+    xmlns:context="http://www.springframework.org/schema/context"
+    xmlns:mvc="http://www.springframework.org/schema/mvc"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd  
+    http://www.springframework.org/schema/tx     http://www.springframework.org/schema/tx/spring-tx.xsd         
+    http://www.springframework.org/schema/context     http://www.springframework.org/schema/context/spring-context.xsd
+    http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+    
+<!-- 对静态资源文件的访问,因为Spring MVC会拦截所有请求,导致jsp页面中对js和CSS的引用也被拦截,配置后可以把对资源的请求交给项目的 默认拦截器而不是Spring MVC,web中有配置 -->
+<mvc:default-servlet-handler/>
+	<!-- spring mvc 能够访问静态内容 begin -->
+<!-- <mvc:resources location="/" mapping="/**/*.js" /> -->
+<!-- <mvc:resources location="/" mapping="/**/*.css" /> -->
+<!-- <mvc:resources location="/imgs/" mapping="/css/images/*.jpg" /> -->
+<!-- <mvc:resources location="/html/**" mapping="/html/**" /> -->
+
+    <!-- 1 处理器适配器  所有处理器适配器都实现 HandlerAdapter接口 -->
+	<bean class="org.springframework.web.servlet.mvc.SimpleControllerHandlerAdapter" />
+	
+	<!-- http请求处理器适配器，实现HttpRequestHandler接口 -->
+	<bean class="org.springframework.web.servlet.mvc.HttpRequestHandlerAdapter"/>	
+	
+    <!-- 对转向页面的路径解析。prefix：前缀， suffix：后缀 -->
+    <bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+    <property name="prefix" value="/WEB-INF/jsp/" />
+    <property name="suffix" value=".jsp" />
+	</bean>
+
+<!-- 拦截器 -->
+<mvc:interceptors>
+<!-- 使用bean定义一个Interceptor，直接定义在mvc:interceptors根下面的，将拦截所有的请求 -->
+<mvc:interceptor>
+
+<!-- 进行拦截：  /**表示拦截所有controller -->
+<mvc:mapping path="/**"/>
+<!-- 不拦截的路径 -->
+<!-- <mvc:exclude-mapping path="/xxxxx/*" /> -->
+<mvc:exclude-mapping path="/**/modelonly" />
+<mvc:exclude-mapping path="/**/ajaxyhmyanzheng" />
+<mvc:exclude-mapping path="/**/zhuce" />
+<mvc:exclude-mapping path="/**/liebiao" />
+<mvc:exclude-mapping path="/**/xiugaiyh" />
+<mvc:exclude-mapping path="/**/shanchuyh" />
+<mvc:exclude-mapping path="/**/images/**" />
+<mvc:exclude-mapping path="/**/icons/**" />
+<!-- <mvc:exclude-mapping path="/**/*.jpg" /> -->
+<!-- 定义在mvc:interceptor下面的表示是对特定的请求才进行拦截的 -->
+<bean id="ZidingyiInterceptor" class="interceptorlanjieqi.ZidingyiInterceptor"></bean>
+<!-- 不拦截的路径 -->
+<!-- <property name="bulanjieurl"> -->
+<!-- <list> -->
+<!-- <value>/modelonly</value> -->
+<!-- </list> -->
+<!-- </property> -->
+</mvc:interceptor>
+</mvc:interceptors>
+
+<!-- 启用注解 -->
+<context:annotation-config />
+<!-- 简化配置：(1)自动注册DefaultAnootationHandlerMapping,AnotationMethodHandlerAdapter  (2)提供一些列：数据绑定，数字和日期的format @NumberFormat, @DateTimeFormat, xml,json默认读写支持   -->
+<mvc:annotation-driven />
+<context:component-scan base-package="controller"></context:component-scan>
+</beans>
